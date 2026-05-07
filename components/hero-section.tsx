@@ -4,7 +4,7 @@ import { Building2, TrendingUp, Brain, BarChart3 } from "lucide-react"
 export function HeroSection() {
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-primary/5 via-background to-background">
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_110%)] opacity-20" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-20" style={{ maskImage: "radial-gradient(ellipse 60% 50% at 50% 0%, #000 70%, transparent 110%)", WebkitMaskImage: "radial-gradient(ellipse 60% 50% at 50% 0%, #000 70%, transparent 110%)" }} />
       
       <div className="container relative mx-auto px-4 py-24 sm:py-32">
         <div className="flex flex-col items-center text-center">
