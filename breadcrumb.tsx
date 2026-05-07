@@ -1,14 +1,35 @@
 "use client"
 
-import type React from "react"
+import React from "react"
 
 import { MapPin, TrendingUp, Search, ArrowRight, ExternalLink, Bed, Bath, Maximize } from "lucide-react"
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Card } from "@/components/ui/card"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
+
+function Button({ className = "", asChild = false, children, ...props }: any) {
+  const cls = `inline-flex items-center justify-center rounded-md px-4 py-2 ${className}`.trim()
+  if (asChild && children) {
+    return React.cloneElement(children, { className: `${children.props.className || ""} ${cls}`.trim() })
+  }
+  return (
+    <button className={cls} {...props}>
+      {children}
+    </button>
+  )
+}
+
+function Input({ className = "", ...props }: any) {
+  return <input className={`w-full ${className}`.trim()} {...props} />
+}
+
+function Card({ className = "", children, ...props }: any) {
+  return (
+    <div className={`rounded-xl border border-slate-200 bg-white shadow-sm ${className}`.trim()} {...props}>
+      {children}
+    </div>
+  )
+}
 
 export default function HomePage() {
   const router = useRouter()
@@ -28,48 +49,12 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
-      {/* Developer Credits & Copyright Notice Section */}
-      <section className="bg-slate-900 text-white border-b border-slate-800">
-        <div className="container mx-auto px-4 py-8">
-          <div className="max-w-5xl mx-auto space-y-6">
-            <div className="text-center pb-4 border-b border-slate-700">
-              <h3 className="text-2xl font-bold text-teal-400 mb-3">Model Development</h3>
-              <p className="text-slate-300 text-lg">
-                Working prototype model with architecture and code developed by{" "}
-                <span className="font-semibold text-white">Balaga Raghuram</span>
-              </p>
-            </div>
-
-            <div className="space-y-4 text-sm text-slate-300 leading-relaxed">
-              <h4 className="text-lg font-semibold text-white">Intellectual Property Rights</h4>
-              <p>
-                All model copyrights, intellectual property rights, and proprietary algorithms for this UAE Real Estate
-                ML model remain exclusively with <span className="font-semibold text-teal-400">Research 247 UAE</span>.
-                The machine learning architecture, training methodologies, feature engineering approaches, and
-                deployment infrastructure are protected intellectual property of the organization.
-              </p>
-              <p>
-                All models, algorithms, code, and intellectual property developed by team members at Research 247 UAE
-                using the organization's infrastructure, resources, or during employment remain the exclusive property
-                of Research 247 UAE. This includes all derivative works, improvements, and modifications to existing
-                models.
-              </p>
-              <p>
-                Unauthorized reproduction, distribution, or commercial use of this model or its components is strictly
-                prohibited without written permission from Research 247 UAE.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Hero Section */}
       <section className="container mx-auto px-4 py-16 md:py-24">
         <div className="max-w-4xl mx-auto text-center space-y-6">
           <h1 className="text-5xl md:text-6xl font-bold text-slate-900 tracking-tight text-balance">
             UAE Real Estate ML Model
           </h1>
-          <p className="text-sm text-slate-600 font-medium">© Research 247 UAE</p>
 
           <p className="text-xl text-slate-600 text-pretty max-w-2xl mx-auto">
             Advanced machine learning models processing 2.4M+ daily data points with 3.2% MAPE valuation accuracy
@@ -98,7 +83,7 @@ export default function HomePage() {
                   placeholder="Search by location, emirate, or property type..."
                   className="pl-10 h-12 border-0 focus-visible:ring-0"
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value)}
                   onKeyPress={handleKeyPress}
                 />
               </div>
